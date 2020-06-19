@@ -9,10 +9,10 @@ function checkUnset(obj, argin)
 			anonNames = [anonNames;keys(p) .'];
 		end
 	end
-% 	if any(contains(argin,'unit'))
-% 		anonNames = [anonNames;argin{contains(argin,'unit')}];
-% 	end
-% 	
+ 	if any(contains(argin,'unit'))
+ 		anonNames = [anonNames;argin{contains(argin,'unit')}];
+ 	end
+ 	
 	dropped = setdiff(argin, [props;anonNames]);
 	if ~isempty(dropped)
 		error('Properties {%s} are not valid property names.',...
