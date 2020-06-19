@@ -17,9 +17,9 @@ refs = containers.Map;
 %parse datasets
 datasetProperties = containers.Map;
 for i=1:length(info.Datasets)
-    datasetInfo = info.Datasets(i)
-    fullPath = [info.Name '/' datasetInfo.Name]
-    dataset = io.parseDataset(filename, datasetInfo, fullPath, Blacklist)
+    datasetInfo = info.Datasets(i);
+    fullPath = [info.Name '/' datasetInfo.Name];
+    dataset = io.parseDataset(filename, datasetInfo, fullPath, Blacklist);
     if isa(dataset, 'containers.Map')
         datasetProperties = [datasetProperties; dataset];
     else
@@ -30,7 +30,7 @@ end
 %parse subgroups
 groupProperties = containers.Map;
 for i=1:length(info.Groups)
-    group = info.Groups(i)
+    group = info.Groups(i);
     if any(strcmp(group.Name, Blacklist.groups))
         continue;
     end
