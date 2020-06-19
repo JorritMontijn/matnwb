@@ -1,14 +1,14 @@
-function parsed = parseDataset(filename, info, fullpath, Blacklist)
+function parsed = parseDataset(filename, info, fullPath, Blacklist)
 %typed and untyped being container maps containing type and untyped datasets
 % the maps store information regarding information and stored data
 % NOTE, dataset name is in path format so we need to parse that out.
 name = info.Name;
 
 %check if typed and parse attributes
-[attrargs, typename] = io.parseAttributes(filename, info.Attributes, fullpath, Blacklist);
+[attrargs, typename] = io.parseAttributes(filename, info.Attributes, fullPath, Blacklist);
 
 fid = H5F.open(filename, 'H5F_ACC_RDONLY', 'H5P_DEFAULT');
-did = H5D.open(fid, fullpath);
+did = H5D.open(fid, fullPath);
 props = attrargs;
 datatype = info.Datatype;
 dataspace = info.Dataspace;
@@ -57,11 +57,11 @@ else
         
         data = types.untyped.DataPipe(maxDims,...
             'filename', filename,...
-            'path', fullpath,...
+            'path', fullPath,...
             'axis', axis,...
             'offset', offset);
     else
-        data = types.untyped.DataStub(filename, fullpath);
+        data = types.untyped.DataStub(filename, fullPath);
     end
     H5P.close(pid);
     H5S.close(sid);

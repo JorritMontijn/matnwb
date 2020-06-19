@@ -7,9 +7,13 @@ for i=1:length(props)
         anonNames = [anonNames;{p.name}];
     elseif isa(p, 'types.untyped.Set')
         anonNames = [anonNames;keys(p) .'];
-    end
+	end
 end
-dropped = setdiff(argin, [props;anonNames]);
+if any(contains(argin,'unit'))
+	anonNames = [anonNames;argin{contains(argin,'unit')}];
+end
+
+dropped = setdiff(argin, [props;anonNames])
 if ~isempty(dropped)
     error('Properties {%s} are not valid property names.',...
         misc.cellPrettyPrint(dropped));
