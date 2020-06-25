@@ -4,9 +4,13 @@ Namespace = schemes.loadNamespace(namespaceName);
 
 path = fullfile(misc.getWorkspace(), '+types', ['+' Namespace.name]);
 if exist(path, 'dir') == 7
-    rmdir(path, 's');
+    %rmdir(path, 's');
 end
-mkdir(path);
+try
+	mkdir(path);
+catch
+	%ignore
+end
 classes = keys(Namespace.registry);
 pregenerated = containers.Map; %generated nodes and props for faster dependency resolution
 for i=1:length(classes)
